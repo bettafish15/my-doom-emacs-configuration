@@ -197,3 +197,6 @@
          (native-comp-available-p))
     (message "native compilation is available")
   (message "native compilation is *not* available"))
+
+(after! doom-cli-env
+  (add-to-list 'doom-env-allow "^SSH_"))

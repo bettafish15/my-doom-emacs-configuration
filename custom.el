@@ -13,3 +13,7 @@
 
 (setq-hook! 'typescript-mode-hook +format-with-lsp nil)
 (setq-hook! 'typescript-tsx-mode-hook +format-with-lsp nil)
+
+(setq flycheck-command-wrapper-function
+      (lambda (command)
+        (append '("bundle" "exec") command)))

@@ -177,3 +177,5 @@
       :map vterm-mode-map
       "C-k" #'vterm-send-up
       "C-j" #'vterm-send-down)
+
+(package! flycheck :disable t)
