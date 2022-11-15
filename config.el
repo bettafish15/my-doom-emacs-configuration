@@ -66,11 +66,11 @@
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;;
-(add-to-list 'default-frame-alist '(font . "Iosevka-16"))
+(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 (setq doom-theme 'doom-tokyo-night
-      doom-font (font-spec :family "Iosevka" :size 16)
+      doom-font (font-spec :family "Iosevka" :size 14)
       doom-unicode-font (font-spec :family "Iosevka" :size 12)
       doom-variable-pitch-font (font-spec :family "Iosevka" :size 16)
       doom-big-font (font-spec :family "Iosevka" :size 19)
@@ -171,11 +171,21 @@
 (global-set-key [f6] 'my-dired-create-empty-file)
 
 (after! lsp-ui
-  (setq lsp-ui-sideline-diagnostic-max-lines 2))
+  (setq lsp-ui-sideline-diagnostic-max-lines 5))
 
 (map! :after vterm
       :map vterm-mode-map
       "C-k" #'vterm-send-up
       "C-j" #'vterm-send-down)
 
-(package! flycheck :disable t)
+
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+
+(exec-path-from-shell-copy-env "PATH")
