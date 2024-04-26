@@ -36,13 +36,13 @@
      'face 'doom-dashboard-banner)))
 
 (custom-set-faces!
- '(doom-dashboard-banner :weight normal)
+  '(doom-dashboard-banner :weight normal)
   ;;'(doom-dashboard-footer :inherit font-lock-constant-face)
   ;;'(doom-dashboard-footer-icon :inherit all-the-icons-red)
   ;;'(doom-dashboard-loaded :inherit font-lock-warning-face)
   ;;'(doom-dashboard-menu-desc :inherit font-lock-string-face)
   ;;'(doom-dashboard-menu-title :inherit font-lock-function-name-face)
-)
+  )
 
 (setq +doom-dashboard-ascii-banner-fn #'custom-banner)
 
@@ -127,7 +127,7 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;
+                                        ;
 ;;; Modules
 
 ;;; :completion company
@@ -179,16 +179,17 @@
       "C-j" #'vterm-send-down)
 
 
+(use-package! lsp-tailwindcss)
 (use-package! tree-sitter
   :config
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-(when (daemonp)
-  (exec-path-from-shell-initialize))
+;; (when (daemonp)
+;;   (exec-path-from-shell-initialize))
 
-(exec-path-from-shell-copy-env "PATH")
+;; (exec-path-from-shell-copy-env "PATH")
 
 ;; cloudformation-mode
 
@@ -212,6 +213,15 @@ See URL 'https://github.com/awslabs/cfn-python-lint'."
                             (id "E" (one-or-more digit)) ":" (message) line-end)
                      )
     :modes (cfn-mode)
-  )
+    )
   (add-to-list 'flycheck-checkers 'cfn-lint)
-)
+  )
+
+(setq lsp-clients-angular-language-server-command
+      '("node"
+        "/usr/lib/node_modules/@angular/language-server"
+        "--ngProbeLocations"
+        "/usr/lib/node_modules"
+        "--tsProbeLocations"
+        "/usr/lib/node_modules"
+        "--stdio"))

@@ -19,3 +19,4 @@
 (setq flycheck-command-wrapper-function
       (lambda (command)
         (append '("bundle" "exec") command)))
+(setq projectile-require-project-root t)
